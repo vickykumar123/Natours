@@ -1,10 +1,11 @@
 /* eslint-disable*/
 
-import { login, logout } from './login';
+import { login, logout, signup } from './login';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 
 const loginForm = document.querySelector('.form--login');
+const signupForm = document.querySelector('.form--signup');
 const logoutBtn = document.querySelector('.logout');
 const updateUserData = document.querySelector('.form-user-data');
 const updatePassword = document.querySelector('.form-user-settings');
@@ -17,6 +18,17 @@ if (loginForm)
     const password = document.getElementById('password').value;
 
     login(email, password);
+  });
+
+if (signupForm)
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('passwordConfirm').value;
+    signup(name, email, password, passwordConfirm);
+    //
   });
 
 if (logoutBtn) logoutBtn.addEventListener('click', logout);

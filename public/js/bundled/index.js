@@ -577,6 +577,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 var _updateSettings = require("./updateSettings");
 var _stripe = require("./stripe");
 const loginForm = document.querySelector(".form--login");
+const signupForm = document.querySelector(".form--signup");
 const logoutBtn = document.querySelector(".logout");
 const updateUserData = document.querySelector(".form-user-data");
 const updatePassword = document.querySelector(".form-user-settings");
@@ -586,6 +587,15 @@ if (loginForm) loginForm.addEventListener("submit", (e)=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     (0, _login.login)(email, password);
+});
+if (signupForm) signupForm.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const passwordConfirm = document.getElementById("passwordConfirm").value;
+    (0, _login.signup)(name, email, password, passwordConfirm);
+//
 });
 if (logoutBtn) logoutBtn.addEventListener("click", (0, _login.logout));
 if (updateUserData) updateUserData.addEventListener("submit", (e)=>{
@@ -627,6 +637,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "login", ()=>login);
 parcelHelpers.export(exports, "logout", ()=>logout);
+parcelHelpers.export(exports, "signup", ()=>signup);
 var _alert = require("./alert");
 const login = async (email, password)=>{
     try {
@@ -662,6 +673,30 @@ const logout = async ()=>{
         }
     } catch (err) {
         (0, _alert.showAlert)("error", "Error in logging out, Try again later!!");
+    }
+};
+const signup = async (name, email, password, passwordConfirm)=>{
+    console.log("Signing-up");
+    try {
+        const res = await axios({
+            method: "POST",
+            url: "http://127.0.0.1:3000/api/v1/users/signup",
+            data: {
+                name,
+                email,
+                password,
+                passwordConfirm
+            }
+        });
+        if (res.data.status === "success") {
+            document.querySelector(".sign-up").textContent = "Processing...";
+            (0, _alert.showAlert)("success", "Signned-up in successfully");
+            window.setTimeout(()=>{
+                location.assign("/");
+            }, 500);
+        }
+    } catch (err) {
+        (0, _alert.showAlert)("error", err.response.data.message);
     }
 };
 

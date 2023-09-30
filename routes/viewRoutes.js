@@ -14,6 +14,11 @@ viewRouter.get(
 );
 viewRouter.get('/tour/:slug', authController.isLogged, viewsController.getTour);
 viewRouter.get('/login', authController.isLogged, viewsController.getLoginForm);
+viewRouter.get(
+  '/signup',
+  authController.isLogged,
+  viewsController.getSignupForm,
+);
 viewRouter.get('/me', authController.protect, viewsController.getAccount);
 viewRouter.get('/my-tour', authController.protect, viewsController.getMyTour);
 // viewRouter.post(
