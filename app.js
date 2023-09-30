@@ -16,6 +16,7 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
+const compression = require('compression');
 
 const app = express();
 
@@ -163,6 +164,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/review', reviewRouter);
 app.use('/api/v1/booking', bookingRoutes);
 app.use('/', viewRouter);
+app.use(compression());
 
 app.all('*', (req, res, next) => {
   //Error Handling methods

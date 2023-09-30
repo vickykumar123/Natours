@@ -1,6 +1,6 @@
 node_modules
 *.env
-.cache
-.parcel-cache
+.cache/
+.parcel-cache/
 dev-data
 
