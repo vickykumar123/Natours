@@ -95,7 +95,7 @@ app.use(
 
 // app.use(helmet());
 
-app.get(
+app.post(
   '/webhook-checkout',
   express.raw({ type: 'application/json' }),
   bookingController.webhookCheckout,
