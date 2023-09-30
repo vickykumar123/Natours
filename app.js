@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp'); //http parameter posioning
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const errorController = require('./controllers/errorController');
@@ -17,6 +18,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const compression = require('compression');
+const bookingController = require('./controllers/bookingController');
 
 const app = express();
 
@@ -26,6 +28,8 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 //MiddleWare
+//CORS
+app.use(cors());
 //Set security headers
 // Further HELMET configuration for Security Policy (CSP)
 const scriptSrcUrls = ['https://unpkg.com/', 'https://tile.openstreetmap.org'];
@@ -91,6 +95,11 @@ app.use(
 
 // app.use(helmet());
 
+app.get(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout,
+);
 // app.use(express.json()); // middleware to send the post request
 //Body Parser
 app.use(express.json({ limit: '10kb' })); //this limit the data that is coming from the body to stop DDOS

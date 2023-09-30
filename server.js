@@ -61,3 +61,11 @@ process.on('unhandledRejection', (err) => {
     process.exit(1);
   });
 });
+
+//Sigterm
+process.on('SIGTERM', () => {
+  console.log('Recieved Sigterm signal, Shutting the SERVER!!!');
+  server.close(() => {
+    console.log('Process terminated');
+  });
+});
