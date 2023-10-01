@@ -15,19 +15,18 @@ function signInToken(id) {
 
 function creatSendJWTToken(user, statusCode, res) {
   const token = signInToken(user._id);
-  const cookieOptions = {
+
+  res.cookie('jwt', token, {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-    ), // hour*min*sec*milliSec
+    ),
     httpOnly: true,
-  };
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+  });
 
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-
-  res.cookie('jwt', token, cookieOptions);
-
-  //remove the password
+  // Remove password from output
   user.password = undefined;
+
   res.status(statusCode).json({
     status: 'success',
     token,

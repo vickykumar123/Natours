@@ -21,10 +21,7 @@ const compression = require('compression');
 const bookingController = require('./controllers/bookingController');
 
 const app = express();
-app.set('trust proxy', 1);
-app.get('/x-forwarded-for', (request, response) =>
-  response.send(request.headers['x-forwarded-for']),
-);
+app.enable('trust proxy');
 
 app.use(express.static(`${__dirname}/public`)); //this will render public folder html
 //Setting up pug template
