@@ -21,6 +21,7 @@ const compression = require('compression');
 const bookingController = require('./controllers/bookingController');
 
 const app = express();
+app.enable('trust proxy');
 
 app.use(express.static(`${__dirname}/public`)); //this will render public folder html
 //Setting up pug template
@@ -148,15 +149,6 @@ app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   // console.log(req.cookies);
   next();
-});
-
-app.enable('trust proxy');
-app.use((req, res, next) => {
-  if (req.secure) {
-    next();
-  } else {
-    res.redirect('https://' + req.headers.host + req.url);
-  }
 });
 
 // app.get('/', (req, res) => {
