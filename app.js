@@ -141,6 +141,7 @@ if (process.env.NODE_ENV === 'development') {
 
 //Rate Limit the api request
 const limiter = rateLimit({
+  validate: { trustProxy: false },
   max: 100,
   windowMs: 60 * 60 * 1000,
   message: 'Too many request to the api, Please try again after 1 hour',
