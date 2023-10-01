@@ -45,9 +45,9 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
+  creatSendJWTToken(newUser, 201, res);
   const url = `${req.protocol}://${req.get('host')}/me`;
   await new Email(newUser, url).sendWelCome();
-  creatSendJWTToken(newUser, 201, res);
 });
 
 //LOGIN
