@@ -12,13 +12,15 @@ Welcome to Natours - Book Your Tour, a secure and innovative full-stack applicat
 #### File Upload: Added functionality for easy file upload, enhancing user interaction.
 #### Seamless Payment Integration: Integrated Stripe for seamless payment processing, ensuring user convenience.
 ## Project Links:
-Live Demo: Natours - Book Your Tour
+Live Demo: https://lnkd.in/grqX5fKS -Natours - Book Your Tour
 GitHub Repository: Natours GitHub
-Technologies Used:
+
+## Technologies Used:
 Backend: Node.js, Express
 Database: MongoDB
 Authentication: JSON Web Tokens (JWT)
 Payment Integration: Stripe
+
 ## How to Run:
 Clone the repository: ``` git clone https://github.com/vickykumar123/Natours.git ```
 
