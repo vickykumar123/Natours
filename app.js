@@ -150,6 +150,15 @@ app.use((req, res, next) => {
   next();
 });
 
+app.enable('trust proxy');
+app.use((req, res, next) => {
+  if (req.secure) {
+    next();
+  } else {
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+});
+
 // app.get('/', (req, res) => {
 //   //   res.status(200).send('Hello from the server side...');
 //   res
