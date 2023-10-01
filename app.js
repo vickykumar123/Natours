@@ -30,7 +30,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 //MiddleWare
 //CORS
-app.use(cors());
+// app.use(cors());
 //Set security headers
 // Further HELMET configuration for Security Policy (CSP)
 const scriptSrcUrls = ['https://unpkg.com/', 'https://tile.openstreetmap.org'];
